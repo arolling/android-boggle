@@ -131,8 +131,10 @@ public class GameActivity extends AppCompatActivity {
         mAddWordButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String word = mAnswerField.getText().toString();
-                if(word.length() > 2){
+                String word = mAnswerField.getText().toString().toLowerCase();
+                if (mWordsGuessed.contains(word)){
+                    Toast.makeText(GameActivity.this, "This word is a duplicate!", Toast.LENGTH_SHORT).show();
+                } else if(word.length() > 2){
                     mWordsGuessed.add(word);
                     mAnswerField.setText("");
                     adapter.notifyDataSetChanged();

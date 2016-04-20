@@ -35,21 +35,45 @@ public class ResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_results);
         ButterKnife.bind(this);
 
-//        ArrayAdapter validAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mValidWords);
-//        mValidWordsList.setAdapter(validAdapter);
-//        ArrayAdapter invalidAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mInvalidWords);
-//        mValidWordsList.setAdapter(invalidAdapter);
+//
 
         Intent intent = getIntent();
         String letterString = intent.getStringExtra("letterDisplay");
         mLetterSet = letterString.split("  ");
         mWordsGuessed = intent.getStringArrayListExtra("wordsGuessed");
+        evaluateWords();
 
-
+        ArrayAdapter validAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mValidWords);
+        mValidWordsList.setAdapter(validAdapter);
+        ArrayAdapter invalidAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mInvalidWords);
+        mInvalidWordsList.setAdapter(invalidAdapter);
 
 
 
         mLetterSetText.setText(letterString);
         //mTotalScoreText.setText(mScore);
+    }
+
+    private static void evaluateWords(){
+        mValidWords = new ArrayList<String>();
+        mInvalidWords = new ArrayList<String>();
+        for (String word : mWordsGuessed){
+            String testWord = word.toUpperCase();
+            for (int i = 0; i < mLetterSet.length; i++){
+                int index = testWord.indexOf(mLetterSet[i]);
+                if (index > -1){
+                    testWord = testWord.replaceFirst(mLetterSet[i], "");
+                }
+            }
+            if (testWord.length() > 0){
+                Log.d(TAG, "invalid " + testWord);
+                mInvalidWords.add(word);
+            } else {
+                Log.d(TAG, "valid " + word);
+
+                mValidWords.add(word);
+            }
+        }
+
     }
 }
