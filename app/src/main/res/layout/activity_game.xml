@@ -7,6 +7,64 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.epicodus.bogglesolitaire.GameActivity">
+    tools:context="com.epicodus.bogglesolitaire.GameActivity"
+    android:background="@color/colorPrimaryLight">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tvChosenLetters"
+        android:layout_marginTop="30dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End Round"
+        android:id="@+id/buttonEndRound"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorTextIcons"
+        android:background="@color/colorAccent" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/buttonEndRound"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="37dp"
+        android:layout_alignRight="@+id/buttonEndRound"
+        android:layout_alignEnd="@+id/buttonEndRound" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Word"
+        android:id="@+id/buttonAddWord"
+        android:textStyle="bold"
+        android:textColor="@color/colorTextIcons"
+        android:background="@color/colorAccent"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvAddedWords"
+        android:layout_below="@+id/tvChosenLetters"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/buttonAddWord"
+        android:textColor="@color/colorAccent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" />
 </RelativeLayout>
