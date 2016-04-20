@@ -3,6 +3,10 @@ package com.epicodus.bogglesolitaire;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,10 +16,18 @@ import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.concurrent.ThreadLocalRandom;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class GameActivity extends AppCompatActivity {
     public static final String TAG = GameActivity.class.getSimpleName();
     private static ArrayList<Map> mAllDice;
     private static ArrayList<Character> mLetterSet;
+    @Bind(R.id.buttonAddWord) Button mAddWordButton;
+    @Bind(R.id.buttonEndRound) Button mEndRoundButton;
+    @Bind(R.id.tvChosenLetters) TextView mChosenLettersView;
+    @Bind(R.id.lvAddedWords) ListView mAddedWordsView;
+    @Bind(R.id.etAnswerField) EditText mAnswerField;
     private static final Map<Integer, Character> die1;
     static {
         die1 = new HashMap<Integer, Character>();
@@ -100,6 +112,15 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        ButterKnife.bind(this);
+        this.initializeDice();
+        mLetterSet = new ArrayList<Character>();
+        mLetterSet = generateLetters();
+        String letterDisplay = letterFormat(mLetterSet);
+        mChosenLettersView.setText(letterDisplay);
+    }
+
+    private static void initializeDice() {
         mAllDice = new ArrayList<Map>();
         mAllDice.add(die1);
         mAllDice.add(die2);
@@ -109,16 +130,10 @@ public class GameActivity extends AppCompatActivity {
         mAllDice.add(die6);
         mAllDice.add(die7);
         mAllDice.add(die8);
-        mLetterSet = new ArrayList<Character>();
-        mLetterSet = generateLetters();
-
-
     }
 
     private ArrayList<Character> generateLetters(){
-        Log.d(TAG, "i am within generateLetters");
         ArrayList<Character> letterList = new ArrayList<Character>();
-
         do{
             letterList.clear();
             Random rand = new Random();
@@ -126,7 +141,7 @@ public class GameActivity extends AppCompatActivity {
                 int randomNum = rand.nextInt(6) + 1;
                 Character letter = (Character) mAllDice.get(i).get(randomNum);
                 letterList.add(Character.toUpperCase(letter));
-                Log.d(TAG, letterList.get(letterList.size() - 1).toString());
+//                Log.d(TAG, letterList.get(letterList.size() - 1).toString());
             }
 
         } while(!vowelChecker(letterList));
@@ -147,4 +162,14 @@ public class GameActivity extends AppCompatActivity {
             return false;
         }
     }
+
+    private String letterFormat(ArrayList<Character> charArray) {
+        String outputString = "";
+        for (Character letter : charArray) {
+            outputString = outputString + letter + "  ";
+        }
+        return outputString.trim();
+    }
+
+
 }
