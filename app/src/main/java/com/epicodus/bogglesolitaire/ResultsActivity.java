@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -55,6 +56,14 @@ public class ResultsActivity extends AppCompatActivity {
 
         mLetterSetText.setText(letterString);
         mTotalScoreText.setText(mScore.toString());
+
+        mRestartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ResultsActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private static void evaluateWords(){

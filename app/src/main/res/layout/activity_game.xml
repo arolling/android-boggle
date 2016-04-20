@@ -27,22 +27,26 @@
         android:layout_height="wrap_content"
         android:text="End Round"
         android:id="@+id/buttonEndRound"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textColor="@color/colorTextIcons"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorAccent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/buttonAddWord"
+        android:layout_alignEnd="@+id/buttonAddWord"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="20sp" />
 
     <EditText
         android:layout_height="wrap_content"
         android:id="@+id/etAnswerField"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_above="@+id/buttonEndRound"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="37dp"
-        android:layout_alignRight="@+id/buttonEndRound"
-        android:layout_alignEnd="@+id/buttonEndRound" />
+        android:layout_toLeftOf="@+id/buttonAddWord"
+        android:layout_toStartOf="@+id/buttonAddWord" />
 
     <Button
         android:layout_width="wrap_content"
