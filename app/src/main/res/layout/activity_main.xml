@@ -7,10 +7,76 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.epicodus.bogglesolitaire.MainActivity">
+    tools:context="com.epicodus.bogglesolitaire.MainActivity"
+    android:background="@color/colorPrimaryLight">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Rules:"
+        android:textSize="28sp"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/textView"
+        android:id="@+id/linearLayout"
+        android:layout_marginTop="40dp"
+
+        android:layout_alignParentRight="true"
+        android:layout_height="300dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1) Hit the button to throw 8 dice with letters"
+            android:id="@+id/textView2"
+            android:textSize="18sp"
+            android:paddingTop="10dp"
+            android:textColor="@color/colorPrimaryText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2) List out as many words as you can using only the provided letters."
+            android:id="@+id/textView3"
+            android:textSize="18sp"
+            android:paddingTop="10dp"
+            android:textColor="@color/colorPrimaryText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3) Words must be at least three letters long."
+            android:id="@+id/textView4"
+            android:textSize="18sp"
+            android:paddingTop="10dp"
+            android:textColor="@color/colorPrimaryText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4) Click the end game button when done, and we will give you your score."
+            android:id="@+id/textView5"
+            android:textSize="18sp"
+            android:paddingTop="10dp"
+            android:textColor="@color/colorPrimaryText" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Game"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorTextIcons"
+        android:textStyle="bold"
+        android:textSize="20sp" />
 </RelativeLayout>
