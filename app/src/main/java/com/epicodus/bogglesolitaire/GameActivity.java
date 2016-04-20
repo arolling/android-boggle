@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -109,12 +110,41 @@ public class GameActivity extends AppCompatActivity {
         mAllDice.add(die7);
         mAllDice.add(die8);
         mLetterSet = new ArrayList<Character>();
-        Random rand = new Random();
-        for (int i = 0; i < mAllDice.size(); i++) {
-            int randomNum = rand.nextInt(6) + 1;
-            Character letter = (Character) mAllDice.get(i).get(randomNum);
-            mLetterSet.add(Character.toUpperCase(letter));
-            Log.d(TAG, mLetterSet.get(i).toString());
+        mLetterSet = generateLetters();
+
+
+    }
+
+    private ArrayList<Character> generateLetters(){
+        Log.d(TAG, "i am within generateLetters");
+        ArrayList<Character> letterList = new ArrayList<Character>();
+
+        do{
+            letterList.clear();
+            Random rand = new Random();
+            for (int i = 0; i < mAllDice.size(); i++) {
+                int randomNum = rand.nextInt(6) + 1;
+                Character letter = (Character) mAllDice.get(i).get(randomNum);
+                letterList.add(Character.toUpperCase(letter));
+                Log.d(TAG, letterList.get(letterList.size() - 1).toString());
+            }
+
+        } while(!vowelChecker(letterList));
+        return letterList;
+    }
+
+    private boolean vowelChecker(ArrayList<Character> letterSet){
+        Character[] vowels = {'A', 'E', 'I', 'O', 'U'};
+        int counter = 0;
+        for (int i = 0; i < letterSet.size(); i++){
+            if (Arrays.asList(vowels).contains(letterSet.get(i))){
+                counter++;
+            }
+        }
+        if(counter > 1){
+            return true;
+        } else {
+            return false;
         }
     }
 }
