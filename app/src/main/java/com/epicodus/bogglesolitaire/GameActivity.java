@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +33,7 @@ public class GameActivity extends AppCompatActivity {
     private static ArrayList<String> mWordsGuessed;
     @Bind(R.id.buttonAddWord) Button mAddWordButton;
     @Bind(R.id.buttonEndRound) Button mEndRoundButton;
-    @Bind(R.id.tvChosenLetters) TextView mChosenLettersView;
+    @Bind(R.id.tvChosenLetters) GridView mChosenLettersView;
     @Bind(R.id.lvAddedWords) ListView mAddedWordsView;
     @Bind(R.id.etAnswerField) EditText mAnswerField;
     @Bind(R.id.tvTimer) TextView mTimer;
@@ -127,7 +129,7 @@ public class GameActivity extends AppCompatActivity {
         mLetterSet = new ArrayList<Character>();
         mLetterSet = generateLetters();
         final String letterDisplay = letterFormat(mLetterSet);
-        mChosenLettersView.setText(letterDisplay);
+
         final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mWordsGuessed);
         mAddedWordsView.setAdapter(adapter);
         mAddWordButton.setOnClickListener(new View.OnClickListener(){
@@ -155,6 +157,12 @@ public class GameActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        String[] boggleLetters = letterDisplay.split("  ");
+
+
+        ArrayAdapter<String> letterAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, boggleLetters);
+        mChosenLettersView.setAdapter(letterAdapter);
 
         new CountDownTimer(30000, 1000) {
             public void onTick(long millisUntilFinished) {
