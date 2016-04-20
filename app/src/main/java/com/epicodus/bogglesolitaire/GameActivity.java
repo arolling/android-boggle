@@ -3,6 +3,8 @@ package com.epicodus.bogglesolitaire;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -23,6 +25,7 @@ public class GameActivity extends AppCompatActivity {
     public static final String TAG = GameActivity.class.getSimpleName();
     private static ArrayList<Map> mAllDice;
     private static ArrayList<Character> mLetterSet;
+    private static ArrayList<String> mWordsGuessed;
     @Bind(R.id.buttonAddWord) Button mAddWordButton;
     @Bind(R.id.buttonEndRound) Button mEndRoundButton;
     @Bind(R.id.tvChosenLetters) TextView mChosenLettersView;
@@ -108,17 +111,34 @@ public class GameActivity extends AppCompatActivity {
         die8.put(5, 'r');
         die8.put(6, 'z');
     }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         ButterKnife.bind(this);
         this.initializeDice();
+        mWordsGuessed = new ArrayList<String>();
         mLetterSet = new ArrayList<Character>();
         mLetterSet = generateLetters();
         String letterDisplay = letterFormat(mLetterSet);
         mChosenLettersView.setText(letterDisplay);
+        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mWordsGuessed);
+        mAddedWordsView.setAdapter(adapter);
+        mAddWordButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mWordsGuessed.add(mAnswerField.getText().toString());
+                mAnswerField.setText("");
+                adapter.notifyDataSetChanged();
+                Log.d(TAG, mWordsGuessed.get(mWordsGuessed.size() - 1));
+            }
+
+        });
     }
+
+
 
     private static void initializeDice() {
         mAllDice = new ArrayList<Map>();
