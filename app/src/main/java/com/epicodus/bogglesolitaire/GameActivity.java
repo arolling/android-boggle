@@ -124,7 +124,7 @@ public class GameActivity extends AppCompatActivity {
         mWordsGuessed = new ArrayList<String>();
         mLetterSet = new ArrayList<Character>();
         mLetterSet = generateLetters();
-        String letterDisplay = letterFormat(mLetterSet);
+        final String letterDisplay = letterFormat(mLetterSet);
         mChosenLettersView.setText(letterDisplay);
         final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mWordsGuessed);
         mAddedWordsView.setAdapter(adapter);
@@ -147,6 +147,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(GameActivity.this, ResultsActivity.class);
                 intent.putExtra("wordsGuessed", mWordsGuessed);
+                intent.putExtra("letterDisplay", letterDisplay);
                 startActivity(intent);
             }
         });
