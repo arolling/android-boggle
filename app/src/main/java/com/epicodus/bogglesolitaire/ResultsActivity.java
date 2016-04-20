@@ -12,6 +12,8 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,7 +29,7 @@ public class ResultsActivity extends AppCompatActivity {
     private static ArrayList<String> mWordsGuessed;
     private static ArrayList<String> mValidWords;
     private static ArrayList<String> mInvalidWords;
-    private static int mScore;
+    private static Integer mScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class ResultsActivity extends AppCompatActivity {
         String letterString = intent.getStringExtra("letterDisplay");
         mLetterSet = letterString.split("  ");
         mWordsGuessed = intent.getStringArrayListExtra("wordsGuessed");
+        mScore = 0;
         evaluateWords();
 
         ArrayAdapter validAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mValidWords);
@@ -51,7 +54,7 @@ public class ResultsActivity extends AppCompatActivity {
 
 
         mLetterSetText.setText(letterString);
-        //mTotalScoreText.setText(mScore);
+        mTotalScoreText.setText(mScore.toString());
     }
 
     private static void evaluateWords(){
@@ -66,14 +69,25 @@ public class ResultsActivity extends AppCompatActivity {
                 }
             }
             if (testWord.length() > 0){
-                Log.d(TAG, "invalid " + testWord);
                 mInvalidWords.add(word);
             } else {
-                Log.d(TAG, "valid " + word);
-
-                mValidWords.add(word);
+                Integer score = getScore(word);
+                mScore += score;
+                String displayWord = word + " -- " + score;
+                mValidWords.add(displayWord);
             }
         }
 
+    }
+
+    private static Integer getScore(String word) {
+        Map<Integer, Integer> scoreValues = new HashMap<Integer, Integer>();
+        scoreValues.put(3, 1);
+        scoreValues.put(4, 1);
+        scoreValues.put(5, 2);
+        scoreValues.put(6, 3);
+        scoreValues.put(7, 5);
+        scoreValues.put(8, 11);
+        return scoreValues.get(word.length());
     }
 }
