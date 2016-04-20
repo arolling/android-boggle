@@ -1,6 +1,7 @@
 package com.epicodus.bogglesolitaire;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
     @Bind(R.id.tvChosenLetters) TextView mChosenLettersView;
     @Bind(R.id.lvAddedWords) ListView mAddedWordsView;
     @Bind(R.id.etAnswerField) EditText mAnswerField;
+    @Bind(R.id.tvTimer) TextView mTimer;
     private static final Map<Integer, Character> die1;
     static {
         die1 = new HashMap<Integer, Character>();
@@ -153,6 +155,18 @@ public class GameActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        new CountDownTimer(30000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                mTimer.setText("" + (millisUntilFinished / 1000));
+            }
+            public void onFinish() {
+                Intent intent = new Intent(GameActivity.this, ResultsActivity.class);
+                intent.putExtra("wordsGuessed", mWordsGuessed);
+                intent.putExtra("letterDisplay", letterDisplay);
+                startActivity(intent);
+            }
+        }.start();
     }
 
 

@@ -15,12 +15,11 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/tvChosenLetters"
-        android:layout_marginTop="30dp"
         android:textSize="40sp"
         android:textStyle="bold"
         android:textColor="@color/colorAccent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvTimer" />
 
     <Button
         android:layout_width="wrap_content"
@@ -64,11 +63,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lvAddedWords"
-        android:layout_below="@+id/tvChosenLetters"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/buttonAddWord"
         android:textColor="@color/colorAccent"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp" />
+        android:layout_toStartOf="@+id/tvTimer"
+        android:layout_alignRight="@+id/buttonAddWord"
+        android:layout_alignEnd="@+id/buttonAddWord"
+        android:layout_below="@+id/tvChosenLetters"
+        android:layout_above="@+id/buttonAddWord" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:text="New Text"
+        android:id="@+id/tvTimer"
+        android:textColor="@color/colorAccent"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
